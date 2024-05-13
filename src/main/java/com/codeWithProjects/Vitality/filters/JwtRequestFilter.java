@@ -1,5 +1,6 @@
 package com.codeWithProjects.Vitality.filters;
 
+import com.codeWithProjects.Vitality.services.jwt.UserDetailsServiceImpl;
 import com.codeWithProjects.Vitality.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
