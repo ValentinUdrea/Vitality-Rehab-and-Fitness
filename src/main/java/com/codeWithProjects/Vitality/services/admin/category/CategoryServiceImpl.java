@@ -4,7 +4,6 @@ import com.codeWithProjects.Vitality.dto.CategoryDto;
 import com.codeWithProjects.Vitality.entity.Category;
 import com.codeWithProjects.Vitality.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service

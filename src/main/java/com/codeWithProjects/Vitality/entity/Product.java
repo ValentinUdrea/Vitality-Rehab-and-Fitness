@@ -1,5 +1,6 @@
 package com.codeWithProjects.Vitality.entity;
 
+import com.codeWithProjects.Vitality.dto.ProductDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -31,5 +32,17 @@ public class Product {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Category category;
+
+    public ProductDto getDto(){
+        ProductDto productDto = new ProductDto();
+        productDto.setId(id);
+        productDto.setName(name);
+        productDto.setPrice(price);
+        productDto.setDescription(description);
+        productDto.setByteImg(img);
+        productDto.setCategoryId(category.getId());
+        return productDto;
+
+    }
 
 }
