@@ -32,5 +32,11 @@ public class AdminProductController {
         return  ResponseEntity.ok(productDtos);
     }
 
+    @GetMapping("/searc/{name}")
+    public ResponseEntity<List<ProductDto>> getAllProductByName(@PathVariable String name){
+        List<ProductDto> productDtos = adminProductService.getAllProductByName(name);
+        return  ResponseEntity.ok(productDtos);
+    }
+
 
 }
