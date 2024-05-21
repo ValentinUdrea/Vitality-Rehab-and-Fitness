@@ -1,7 +1,6 @@
 package com.codeWithProjects.Vitality.controller.admin;
 
 import com.codeWithProjects.Vitality.dto.ProductDto;
-import com.codeWithProjects.Vitality.entity.Product;
 import com.codeWithProjects.Vitality.services.admin.adminproduct.AdminProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
