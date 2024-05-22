@@ -1,6 +1,8 @@
 package com.codeWithProjects.Vitality.services.cart;
 
 import com.codeWithProjects.Vitality.dto.AddProductInCartDto;
+import com.codeWithProjects.Vitality.dto.CartItemsDto;
+import com.codeWithProjects.Vitality.dto.OrderDto;
 import com.codeWithProjects.Vitality.entity.CartItems;
 import com.codeWithProjects.Vitality.entity.Order;
 import com.codeWithProjects.Vitality.entity.Product;
@@ -16,7 +18,9 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService{
@@ -65,6 +69,20 @@ public class CartServiceImpl implements CartService{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User or product not found");
             }
         }
+    }
+
+    public OrderDto getCartByUserId(Long userId){
+        Order activeOrder = orderRepository.findByUserIdAndOrderStatus(userId, OrderStatus.Pending);
+        List<CartItemsDto> cartItemsDtoList = activeOrder.getCartItems().stream().map(CartItems::getCartDto).collect(Collectors.toList());
+        OrderDto orderDto = new OrderDto();
+        orderDto.setAmount(activeOrder.getAmount());
+        orderDto.setId(activeOrder.getId());
+        orderDto.setOrderStatus(activeOrder.getOrderStatus());
+        orderDto.setTotalAmount(activeOrder.getTotalAmount());
+        orderDto.setCartItems(cartItemsDtoList);
+
+
+        return orderDto;
     }
 
 
