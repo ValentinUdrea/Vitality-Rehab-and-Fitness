@@ -2,6 +2,7 @@ package com.codeWithProjects.Vitality.controller.customer;
 
 import com.codeWithProjects.Vitality.dto.AddProductInCartDto;
 import com.codeWithProjects.Vitality.dto.OrderDto;
+import com.codeWithProjects.Vitality.exceptions.ValidationException;
 import com.codeWithProjects.Vitality.services.cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,5 +28,14 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.OK).body(orderDto);
     }
 
+    @GetMapping("/coupon/{userId}/{code}")
+    public ResponseEntity<?> applyCoupon(@PathVariable Long userId, @PathVariable String code){
+        try{
+            OrderDto orderDto = cartService.applyCoupon(userId, code);
+            return ResponseEntity.ok(orderDto);
+        }catch (ValidationException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+    }
 
 }
