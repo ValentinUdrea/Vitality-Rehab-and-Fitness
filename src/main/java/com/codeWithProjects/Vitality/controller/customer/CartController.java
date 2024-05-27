@@ -2,11 +2,11 @@ package com.codeWithProjects.Vitality.controller.customer;
 
 import com.codeWithProjects.Vitality.dto.AddProductInCartDto;
 import com.codeWithProjects.Vitality.dto.OrderDto;
+import com.codeWithProjects.Vitality.dto.PlaceOrderDto;
 import com.codeWithProjects.Vitality.exceptions.ValidationException;
 import com.codeWithProjects.Vitality.services.cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +40,16 @@ public class CartController {
     @PostMapping("/addition")
     public ResponseEntity<OrderDto> increaseProductQuantity(@RequestBody AddProductInCartDto addProductInCartDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(cartService.increaseProductQuantity(addProductInCartDto));
+    }
+
+    @PostMapping("/deduction")
+    public ResponseEntity<OrderDto> decreaseProductQuantity(@RequestBody AddProductInCartDto addProductInCartDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartService.decreaseProductQuantity(addProductInCartDto));
+    }
+
+    @PostMapping("/placeOrder")
+    public ResponseEntity<OrderDto> placeOrder(@RequestBody PlaceOrderDto placeOrderDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartService.placeOrder(placeOrderDto));
     }
 
 
