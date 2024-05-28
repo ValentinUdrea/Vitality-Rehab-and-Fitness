@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -239,6 +238,12 @@ public class CartServiceImpl implements CartService{
 
         }
         return  null;
+    }
+
+    public List<OrderDto> getMyPlacedOrders(Long userId) {
+        return orderRepository.findByUserIdAndOrderStatusIn(userId, List.of(OrderStatus.Placed,OrderStatus.Shipped,
+                OrderStatus.Delivered)).stream().map(Order::getOrderDto).collect(Collectors.toList());
+
     }
 
 
