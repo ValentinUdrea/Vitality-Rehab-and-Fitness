@@ -1,7 +1,10 @@
 package com.codeWithProjects.Vitality.controller.admin;
 
+import com.codeWithProjects.Vitality.dto.FAQDto;
 import com.codeWithProjects.Vitality.dto.ProductDto;
+import com.codeWithProjects.Vitality.entity.FAQ;
 import com.codeWithProjects.Vitality.services.admin.adminproduct.AdminProductService;
+import com.codeWithProjects.Vitality.services.admin.faq.FAQService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,10 @@ import java.util.List;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdminProductController {
+
     private final AdminProductService adminProductService;
+
+    private final FAQService faqService;
 
     @PostMapping("/product")
     public ResponseEntity<ProductDto> addProduct(@ModelAttribute ProductDto productDto) throws IOException {
@@ -45,6 +51,11 @@ public class AdminProductController {
         }
         return ResponseEntity.notFound().build();
 
+    }
+
+    @PostMapping("/faq/{productId}")
+    public ResponseEntity<FAQDto> postFAQ(@PathVariable Long productId, @RequestBody FAQDto faqDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(faqService.postFAQ(productId, faqDto));
     }
 
 
