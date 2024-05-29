@@ -4,7 +4,7 @@ import com.codeWithProjects.Vitality.dto.AddProductInCartDto;
 import com.codeWithProjects.Vitality.dto.OrderDto;
 import com.codeWithProjects.Vitality.dto.PlaceOrderDto;
 import com.codeWithProjects.Vitality.exceptions.ValidationException;
-import com.codeWithProjects.Vitality.services.cart.CartService;
+import com.codeWithProjects.Vitality.services.customer.cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

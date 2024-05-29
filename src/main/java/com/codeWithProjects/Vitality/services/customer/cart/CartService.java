@@ -1,4 +1,4 @@
-package com.codeWithProjects.Vitality.services.cart;
+package com.codeWithProjects.Vitality.services.customer.cart;
 
 import com.codeWithProjects.Vitality.dto.AddProductInCartDto;
 import com.codeWithProjects.Vitality.dto.OrderDto;

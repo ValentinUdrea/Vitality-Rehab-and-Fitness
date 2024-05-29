@@ -1,4 +1,4 @@
-package com.codeWithProjects.Vitality.services.cart;
+package com.codeWithProjects.Vitality.services.customer.cart;
 
 import com.codeWithProjects.Vitality.dto.AddProductInCartDto;
 import com.codeWithProjects.Vitality.dto.CartItemsDto;
@@ -10,7 +10,6 @@ import com.codeWithProjects.Vitality.exceptions.ValidationException;
 import com.codeWithProjects.Vitality.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Date;
