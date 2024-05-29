@@ -2,12 +2,16 @@ package com.codeWithProjects.Vitality.services.customer.review;
 
 import com.codeWithProjects.Vitality.dto.OrderedProductsResponseDto;
 import com.codeWithProjects.Vitality.dto.ProductDto;
-import com.codeWithProjects.Vitality.entity.CartItems;
-import com.codeWithProjects.Vitality.entity.Order;
+import com.codeWithProjects.Vitality.dto.ReviewDto;
+import com.codeWithProjects.Vitality.entity.*;
 import com.codeWithProjects.Vitality.repository.OrderRepository;
+import com.codeWithProjects.Vitality.repository.ProductRepository;
+import com.codeWithProjects.Vitality.repository.ReviewRepository;
+import com.codeWithProjects.Vitality.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +21,12 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService{
 
     private final OrderRepository orderRepository;
+
+    private final ProductRepository productRepository;
+
+    private final UserRepository userRepository;
+
+    private final ReviewRepository reviewRepository;
 
     public OrderedProductsResponseDto getOrderedProductsDetailsByOrderId(Long orderId){
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
@@ -42,5 +52,21 @@ public class ReviewServiceImpl implements ReviewService{
         }
         return orderedProductsResponseDto;
 
+    }
+    public ReviewDto giveReview(ReviewDto reviewDto) throws IOException {
+        Optional<Product> optionalProduct = productRepository.findById(reviewDto.getProductId());
+        Optional<User> optionalUser = userRepository.findById(reviewDto.getUserId());
+        if(optionalProduct.isPresent() && optionalUser.isPresent()){
+            Review review = new Review();
+
+            review.setRating(reviewDto.getRating());
+            review.setDescription(reviewDto.getDescription());
+            review.setUser(optionalUser.get());
+            review.setProduct(optionalProduct.get());
+            review.setImg(reviewDto.getImg().getBytes());
+
+            return reviewRepository.save(review).getDto();
+        }
+        return  null;
     }
 }
