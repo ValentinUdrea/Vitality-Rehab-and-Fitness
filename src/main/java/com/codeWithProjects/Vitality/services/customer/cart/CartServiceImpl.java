@@ -8,6 +8,7 @@ import com.codeWithProjects.Vitality.entity.*;
 import com.codeWithProjects.Vitality.enums.OrderStatus;
 import com.codeWithProjects.Vitality.exceptions.ValidationException;
 import com.codeWithProjects.Vitality.repository.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -244,6 +245,14 @@ public class CartServiceImpl implements CartService{
                 OrderStatus.Delivered)).stream().map(Order::getOrderDto).collect(Collectors.toList());
 
     }
+
+    public OrderDto searchOrderByTrackingId(UUID trackingId){
+        Optional<Order> optionalOrder = orderRepository.findByTrackingId(trackingId);
+        if(optionalOrder.isPresent()){
+            return optionalOrder.get().getOrderDto();
+        }
+        return  null;
+     }
 
 
 

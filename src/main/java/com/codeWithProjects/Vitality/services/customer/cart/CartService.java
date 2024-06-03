@@ -6,6 +6,7 @@ import com.codeWithProjects.Vitality.dto.PlaceOrderDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CartService {
     ResponseEntity<?> addProductToCart(AddProductInCartDto addProductInCartDto);
@@ -23,5 +24,6 @@ public interface CartService {
 
     List<OrderDto> getMyPlacedOrders(Long userId);
 
+    OrderDto searchOrderByTrackingId(UUID trackingId);
 
 }
