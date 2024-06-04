@@ -1,5 +1,6 @@
 package com.codeWithProjects.Vitality.controller.admin;
 
+import com.codeWithProjects.Vitality.dto.AnalyticsResponse;
 import com.codeWithProjects.Vitality.dto.OrderDto;
 import com.codeWithProjects.Vitality.services.admin.adminOrder.AdminOrderService;
 import lombok.RequiredArgsConstructor;
@@ -33,4 +34,10 @@ public class AdminOrderController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(orderDto);
     }
+
+    @GetMapping("/order/analytics")
+    public ResponseEntity<AnalyticsResponse> getAnalytics(){
+        return ResponseEntity.ok(adminOrderService.calculateAnalytics());
+    }
+
 }
